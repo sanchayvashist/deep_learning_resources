@@ -26,6 +26,10 @@ def load_and_prep_image(filename, img_shape=224, scale=True):
     return img/255.
   else:
     return img
+    
+# Function to evaluate: accuracy, precision, recall, f1-score
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+
 
 # Note: The following confusion matrix code is a remix of Scikit-Learn's 
 # plot_confusion_matrix function - https://scikit-learn.org/stable/modules/generated/sklearn.metrics.plot_confusion_matrix.html
@@ -202,12 +206,8 @@ def view_random_image(target_dir, target_class):
   img = mpimg.imread(target_folder + "/" + random_image[0])
   plt.imshow(img)
   plt.title(target_class)
-  plt.axis("off");
-
+  plt.axis("off")
   print(f"Image shape: {img.shape}") # show the shape of the image
-
-  return img
-
 
 def compare_historys(original_history, new_history, initial_epochs=5):
     """
