@@ -310,3 +310,34 @@ def calculate_results(y_true, y_pred):
                   "recall": model_recall,
                   "f1": model_f1}
   return model_results
+
+from sklearn.metrics import confusion_matrix
+
+def calculate_sensitivity_specificity(y_true, y_pred, classes):
+    # Compute confusion matrix
+    cm = confusion_matrix(y_true, y_pred)
+    
+    num_classes = len(classes)
+    sensitivity = []
+    specificity = []
+    
+    for i in range(num_classes):
+        # True positive for class i
+        tp = cm[i, i]
+        
+        # False positives and false negatives for class i
+        fp = cm[:, i].sum() - tp
+        fn = cm[i, :].sum() - tp
+        
+        # True negatives for class i
+        tn = cm.sum() - tp - fp - fn
+        
+        # Calculate sensitivity and specificity for class i
+        sensitivity_i = tp / (tp + fn)
+        specificity_i = tn / (tn + fp)
+        
+        sensitivity.append(sensitivity_i)
+        specificity.append(specificity_i)
+
+    for i in range(len(classes)):
+      print(f"Class {classes[i]} -\tSensitivity: {sensitivity[i]},\ Specificity: {specificity[i]}")
