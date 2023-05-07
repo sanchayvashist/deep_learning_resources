@@ -340,4 +340,4 @@ def calculate_sensitivity_specificity(y_true, y_pred, classes):
         specificity.append(specificity_i)
 
     for i in range(len(classes)):
-      print(f"Class {classes[i]} -\tSensitivity: {round(sensitivity[i],2)},\tSpecificity: {round(specificity[i],2)}")
+      print(f"Class {classes[i]} -\tSensitivity: {round(sensitivity[i],4)},\tSpecificity: {round(specificity[i],4)}")
